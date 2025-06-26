@@ -82,7 +82,6 @@ const Navbar = () => {
           <a href="/about" className="nav-link">About</a>
           <a href="/our-work" className="nav-link">Our Work</a>
           <a href="/contact" className="nav-link">Contact</a>
-          <a href="/tools" className="nav-link">Tools</a>
         </div>
 
         {/* Animated mobile menu overlay */}
@@ -106,9 +105,6 @@ const Navbar = () => {
               </motion.a>
               <motion.a href="/contact" className="nav-link" variants={itemVariants}>
                 Contact
-              </motion.a>
-              <motion.a href="/tools" className="nav-link" variants={itemVariants}>
-                Tools
               </motion.a>
             </motion.div>
           )}
