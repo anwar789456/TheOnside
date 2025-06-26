@@ -1,0 +1,161 @@
+/* AnimatedBackground.css */
+
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Light Mode Animation */
+.animated-background.light {
+  background: linear-gradient(120deg, #f0f4f8, #d7e3fc);
+}
+
+.animated-background.light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(173, 216, 230, 0.4) 0%, rgba(173, 216, 230, 0) 25%),
+    radial-gradient(circle at 80% 70%, rgba(221, 160, 221, 0.4) 0%, rgba(221, 160, 221, 0) 25%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 35%);
+  animation: lightPulse 15s infinite alternate ease-in-out;
+}
+
+/* Email pattern for light mode */
+.animated-background.light::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 5l5 5m0 0l5 5M20 10l-5 5m0 0l-5 5M40 5l5 5m0 0l5 5M45 10l-5 5m0 0l-5 5M15 35l5 5m0 0l5 5M20 40l-5 5m0 0l-5 5M40 35l5 5m0 0l5 5M45 40l-5 5m0 0l-5 5' stroke='rgba(66, 153, 225, 0.1)' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v10m10-10v10M30 30v10m10-10v10M10 30h10m-10 10h10M50 30h10m-10 10h10' stroke='rgba(66, 153, 225, 0.07)' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  animation: lightMove 30s infinite linear;
+}
+
+/* Dark Mode Animation */
+.animated-background.dark {
+  background: linear-gradient(120deg, #1a202c, #2d3748);
+}
+
+.animated-background.dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(72, 61, 139, 0.4) 0%, rgba(72, 61, 139, 0) 25%),
+    radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.4) 0%, rgba(138, 43, 226, 0) 25%),
+    radial-gradient(circle at 50% 50%, rgba(30, 30, 60, 0.8) 0%, rgba(30, 30, 60, 0) 35%);
+  animation: darkPulse 15s infinite alternate ease-in-out;
+}
+
+/* Email pattern for dark mode */
+.animated-background.dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 5l5 5m0 0l5 5M20 10l-5 5m0 0l-5 5M40 5l5 5m0 0l5 5M45 10l-5 5m0 0l-5 5M15 35l5 5m0 0l5 5M20 40l-5 5m0 0l-5 5M40 35l5 5m0 0l5 5M45 40l-5 5m0 0l-5 5' stroke='rgba(138, 75, 255, 0.15)' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v10m10-10v10M30 30v10m10-10v10M10 30h10m-10 10h10M50 30h10m-10 10h10' stroke='rgba(138, 75, 255, 0.1)' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  animation: darkMove 30s infinite linear;
+}
+
+/* Floating email icons for light mode */
+.email-icon {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(66, 153, 225, 0.6)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'%3E%3C/path%3E%3Cpolyline points='22,6 12,13 2,6'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  animation: float 20s infinite linear;
+}
+
+.email-icon.dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(138, 75, 255, 0.6)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'%3E%3C/path%3E%3Cpolyline points='22,6 12,13 2,6'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Animations */
+@keyframes lightPulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes darkPulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes lightMove {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, 200px 200px;
+  }
+}
+
+@keyframes darkMove {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 100px 100px, 200px 200px;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-700px) translateX(700px) rotate(20deg);
+    opacity: 0;
+  }
+}
