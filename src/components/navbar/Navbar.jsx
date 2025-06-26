@@ -80,7 +80,6 @@ const Navbar = () => {
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <a href="/" className="nav-link">Home</a>
           <a href="/about" className="nav-link">About</a>
-          <a href="/our-work" className="nav-link">Our Work</a>
           <a href="/contact" className="nav-link">Contact</a>
         </div>
 
@@ -99,9 +98,6 @@ const Navbar = () => {
               </motion.a>
               <motion.a href="/about" className="nav-link" variants={itemVariants}>
                 About
-              </motion.a>
-              <motion.a href="/our-work" className="nav-link" variants={itemVariants}>
-                Our Work
               </motion.a>
               <motion.a href="/contact" className="nav-link" variants={itemVariants}>
                 Contact
