@@ -158,6 +158,7 @@ export default function Home() {
           
           {/* Feature Cards */}
           <motion.div 
+            id='about'
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             variants={staggerContainer}
             initial="initial"
@@ -197,7 +198,7 @@ export default function Home() {
 
           {/* Demo Section */}
           <motion.div 
-            id='about'
+            
             className='mt-40'
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -276,13 +277,13 @@ export default function Home() {
               transition={{ delay: 0.3 }}
             >
               <a 
-                href="/privacy" 
+                href="#" 
                 className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'} hover:text-gray-900 transition-colors duration-200`}
               >
                 Privacy
               </a>
               <a 
-                href="/terms" 
+                href="#" 
                 className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'} hover:text-gray-900 transition-colors duration-200`}
               >
                 Terms
@@ -298,7 +299,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              © 2024 AutoFollowUp. All rights reserved. • Built with{' '}
+              © 2025 AutoFollowUp. All rights reserved. • Built with{' '}
               <span className="text-red-500">❤</span> for productivity
             </motion.div>
           </div>

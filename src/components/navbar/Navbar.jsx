@@ -5,10 +5,13 @@ import { Moon, Sun, Mail, Menu, X } from 'lucide-react';
 import './Navbar.css';
 import Button from '../Button/Button';
 import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -96,13 +99,6 @@ const Navbar = () => {
         {/* Desktop navigation - always visible on desktop */}
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <a href="/" className="nav-link">Home</a>
-          <a 
-            href="#about" 
-            className="nav-link"
-            onClick={(e) => handleSmoothScroll(e, 'about')}
-          >
-            About
-          </a>
           <a href="/waitlist" className="nav-link">Contact</a>
         </div>
 
@@ -118,14 +114,6 @@ const Navbar = () => {
             >
               <motion.a href="/" className="nav-link" variants={itemVariants}>
                 Home
-              </motion.a>
-              <motion.a 
-                href="#about" 
-                className="nav-link" 
-                variants={itemVariants}
-                onClick={(e) => handleSmoothScroll(e, 'about')}
-              >
-                About
               </motion.a>
               <motion.a href="/waitlist" className="nav-link" variants={itemVariants}>
                 Contact

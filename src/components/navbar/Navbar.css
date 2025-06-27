@@ -50,7 +50,7 @@
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  /* gap: .8rem; */
   align-items: center;
 }
 
@@ -58,11 +58,25 @@
   text-decoration: none;
   color: inherit;
   font-weight: 500;
-  transition: color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
 .nav-link:hover {
   color: #0066cc;
+  background-color: rgba(0, 102, 204, 0.1);
+}
+
+.dark .nav-link:hover {
+  color: #66a3ff;
+  background-color: rgba(102, 163, 255, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Adjust based on navbar height */
 }
 
 .nav-buttons {
