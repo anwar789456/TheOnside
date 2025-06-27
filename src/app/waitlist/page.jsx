@@ -104,8 +104,8 @@ function WaitList() {
     setSubmitStatus({ loading: true, error: '' });
 
     try {
-      // Send welcome email through API
-      const response = await fetch('/api/send-email', {
+      // Save to database first
+      const dbResponse = await fetch('/api/waitlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,20 +117,48 @@ function WaitList() {
         })
       });
 
-      const data = await response.json();
+      const dbData = await dbResponse.json();
       
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send welcome email');
+      if (!dbResponse.ok) {
+        if (dbResponse.status === 409) {
+          // Email already exists
+          setSubmitStatus({
+            loading: false,
+            error: 'This email is already on the waitlist. Check your inbox for our previous email!'
+          });
+          return;
+        }
+        throw new Error(dbData.error || 'Failed to join waitlist');
       }
-      setSubmitStatus({ loading: false, error: '' });
+
+      // If database save successful, send welcome email
+      const emailResponse = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          firstName: formData.firstName,
+          provider: formData.provider
+        })
+      });
+
+      const emailData = await emailResponse.json();
+      
+      if (!emailResponse.ok) {
+        console.warn('Failed to send welcome email, but user was added to waitlist');
+        // Don't throw error here - user is still successfully added to waitlist
+      }
+
       setIsSubmitted(true);
+      setSubmitStatus({ loading: false, error: '' });
     } catch (error) {
       setSubmitStatus({
         loading: false,
-        error: 'Something went wrong. Please try again.'
+        error: error.message || 'Something went wrong. Please try again.'
       });
     }
-
   };
 
   if (isSubmitted) {
