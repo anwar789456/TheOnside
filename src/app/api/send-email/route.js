@@ -1,12 +1,12 @@
 import { Resend } from 'resend';
 import { NotificationEmail } from '@/components/NotificationEmail';
 
-const resend = new Resend("re_ATe3E5BY_CSWrmjJvQHtNzPybfTSTiGji");
 
 export async function POST(request) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    
     const { email, firstName, provider } = await request.json();
-
     // Send notification email to yourself
     const { data, error } = await resend.emails.send({
       from: 'AutoFollowUp <onboarding@resend.dev>',
