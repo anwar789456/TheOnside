@@ -197,6 +197,7 @@ export default function Home() {
 
           {/* Demo Section */}
           <motion.div 
+            id='about'
             className='mt-40'
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

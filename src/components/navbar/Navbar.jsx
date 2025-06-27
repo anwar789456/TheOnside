@@ -22,6 +22,22 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Smooth scroll function
+  const handleSmoothScroll = (e, targetId) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    // Close mobile menu after clicking
+    setIsMenuOpen(false);
+  };
+
   // Animation variants for the mobile menu
   const menuVariants = {
     hidden: {
@@ -80,7 +96,13 @@ const Navbar = () => {
         {/* Desktop navigation - always visible on desktop */}
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <a href="/" className="nav-link">Home</a>
-          <a href="/about" className="nav-link">About</a>
+          <a 
+            href="#about" 
+            className="nav-link"
+            onClick={(e) => handleSmoothScroll(e, 'about')}
+          >
+            About
+          </a>
           <a href="/waitlist" className="nav-link">Contact</a>
         </div>
 
@@ -97,7 +119,12 @@ const Navbar = () => {
               <motion.a href="/" className="nav-link" variants={itemVariants}>
                 Home
               </motion.a>
-              <motion.a href="/about" className="nav-link" variants={itemVariants}>
+              <motion.a 
+                href="#about" 
+                className="nav-link" 
+                variants={itemVariants}
+                onClick={(e) => handleSmoothScroll(e, 'about')}
+              >
                 About
               </motion.a>
               <motion.a href="/waitlist" className="nav-link" variants={itemVariants}>
