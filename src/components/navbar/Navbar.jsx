@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Mail, Menu, X } from 'lucide-react';
 import './Navbar.css';
 import Button from '../Button/Button';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -110,8 +111,9 @@ const Navbar = () => {
           <button className="theme-toggle" onClick={toggleDarkMode}>
             {isDarkMode ? <Sun size={20} strokeWidth={2} /> : <Moon size={20} strokeWidth={2} />}
           </button>
-          
-          <Button children='join'/>
+          <Link href='/waitlist'>
+            <Button children='join'/>
+          </Link>
           <motion.button 
             className="menu-btn" 
             onClick={toggleMenu}

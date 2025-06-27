@@ -7,6 +7,7 @@ import AnimatedBackground from '@/components/AnimatedBackground/AnimatedBackgrou
 import Button from '@/components/Button/Button';
 import { Mail, Zap, Clock } from 'lucide-react';
 import GmailComponent from '@/components/gmail/GmailComponent';
+import Link from 'next/link';
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -117,7 +118,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
-            <Button children='Join The Waitlist' />
+            <Link href='/waitlist'>
+              <Button children='Join The Waitlist' />
+            </Link>
             <p className={`mt-1.5 ml-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>No credit card required</p>
           </motion.div>
 
