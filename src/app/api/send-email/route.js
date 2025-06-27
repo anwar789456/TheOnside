@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { NotificationEmail } from '@/components/NotificationEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend("re_ATe3E5BY_CSWrmjJvQHtNzPybfTSTiGji");
 
 export async function POST(request) {
   try {
