@@ -81,7 +81,7 @@ const Navbar = () => {
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <a href="/" className="nav-link">Home</a>
           <a href="/about" className="nav-link">About</a>
-          <a href="/contact" className="nav-link">Contact</a>
+          <a href="/waitlist" className="nav-link">Contact</a>
         </div>
 
         {/* Animated mobile menu overlay */}
@@ -100,7 +100,7 @@ const Navbar = () => {
               <motion.a href="/about" className="nav-link" variants={itemVariants}>
                 About
               </motion.a>
-              <motion.a href="/contact" className="nav-link" variants={itemVariants}>
+              <motion.a href="/waitlist" className="nav-link" variants={itemVariants}>
                 Contact
               </motion.a>
             </motion.div>
