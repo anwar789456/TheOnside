@@ -2,12 +2,12 @@ import { supabaseAdmin } from '../../lib/supabase'
 
 export async function POST(request) {
   try {
-    const { email, firstName, provider } = await request.json()
+    const { email, firstName, provider, emailUseCase, pricingPreference } = await request.json()
 
     // Validate required fields
-    if (!email || !firstName) {
+    if (!email) {
       return Response.json(
-        { error: 'Email and first name are required' },
+        { error: 'Email is required' },
         { status: 400 }
       )
     }
@@ -41,8 +41,10 @@ export async function POST(request) {
       .insert([
         {
           email: email.toLowerCase(),
-          first_name: firstName,
-          provider: provider,
+          first_name: firstName || null,
+          provider: provider || 'Not sure',
+          email_use_case: emailUseCase || null,
+          pricing_preference: pricingPreference || null,
           created_at: new Date().toISOString()
         }
       ])
@@ -58,7 +60,8 @@ export async function POST(request) {
 
     return Response.json({
       success: true,
-      message: 'Successfully joined waitlist'
+      message: 'Successfully joined waitlist',
+      data: data[0]
     })
 
   } catch (error) {

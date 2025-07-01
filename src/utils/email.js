@@ -5,5 +5,6 @@ export const validateEmail = (email) => {
 
 export const validateName = (name) => {
   const nameRegex = /^[a-zA-Z\s\-']+$/;
-  return nameRegex.test(name) && name.trim().length > 0;
+  return nameRegex.test(name);
+  // return nameRegex.test(name) && name.trim().length > 0;
 };

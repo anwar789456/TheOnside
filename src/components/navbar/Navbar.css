@@ -50,7 +50,7 @@
 
 .nav-links {
   display: flex;
-  /* gap: .8rem; */
+  gap: 2rem;
   align-items: center;
 }
 

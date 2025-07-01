@@ -5,13 +5,10 @@ import { Moon, Sun, Mail, Menu, X } from 'lucide-react';
 import './Navbar.css';
 import Button from '../Button/Button';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -31,9 +28,9 @@ const Navbar = () => {
     const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      window.scrollTo({
+        top: targetElement.offsetTop - 100, // Offset for navbar height
+        behavior: 'smooth'
       });
     }
     
@@ -98,8 +95,8 @@ const Navbar = () => {
         
         {/* Desktop navigation - always visible on desktop */}
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-          <a href="/" className="nav-link">Home</a>
-          <a href="/waitlist" className="nav-link">Contact</a>
+          <Link href="/" className="nav-link">Home</Link>
+          <Link href="/waitlist" className="nav-link">Contact</Link>
         </div>
 
         {/* Animated mobile menu overlay */}
@@ -112,12 +109,12 @@ const Navbar = () => {
               animate="visible"
               exit="exit"
             >
-              <motion.a href="/" className="nav-link" variants={itemVariants}>
-                Home
-              </motion.a>
-              <motion.a href="/waitlist" className="nav-link" variants={itemVariants}>
-                Contact
-              </motion.a>
+              <motion.div variants={itemVariants}>
+                <Link href="/" className="nav-link">Home</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="/waitlist" className="nav-link">Contact</Link>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

@@ -6,7 +6,9 @@ function WaitList() {
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
-    provider: 'Not sure'
+    provider: 'Not sure',
+    emailUseCase: '',
+    pricingPreference: ''
   });
   
   const [formErrors, setFormErrors] = useState({
@@ -50,10 +52,10 @@ function WaitList() {
         if (!value) return 'Email is required';
         if (!validateEmail(value)) return 'Please enter a valid email address';
         return '';
-      case 'firstName':
-        if (!value) return 'First name is required';
-        if (!validateName(value)) return 'Please enter a valid name (letters, spaces, and hyphens only)';
-        return '';
+      // case 'firstName':
+      //   if (!value) return 'First name is required';
+      //   if (!validateName(value)) return 'Please enter a valid name (letters, spaces, and hyphens only)';
+      //   return '';
       default:
         return '';
     }
@@ -72,16 +74,26 @@ function WaitList() {
       ...prev,
       [name]: validateField(name, value)
     }));
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
   };
 
   const handleProviderChange = (provider) => {
     setFormData({
       ...formData,
       provider: provider
+    });
+  };
+
+  const handlePricingChange = (price) => {
+    setFormData({
+      ...formData,
+      pricingPreference: price
+    });
+  };
+
+  const handleUseCaseChange = (useCase) => {
+    setFormData({
+      ...formData,
+      emailUseCase: useCase
     });
   };
 
@@ -113,7 +125,9 @@ function WaitList() {
         body: JSON.stringify({
           email: formData.email,
           firstName: formData.firstName,
-          provider: formData.provider
+          provider: formData.provider,
+          emailUseCase: formData.emailUseCase,
+          pricingPreference: formData.pricingPreference
         })
       });
 
@@ -140,7 +154,9 @@ function WaitList() {
         body: JSON.stringify({
           email: formData.email,
           firstName: formData.firstName,
-          provider: formData.provider
+          provider: formData.provider,
+          emailUseCase: formData.emailUseCase,
+          pricingPreference: formData.pricingPreference
         })
       });
 
@@ -208,7 +224,7 @@ function WaitList() {
           {/* Email Input */}
           <div className="space-y-2">
             <label htmlFor="email" className={`block text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              Email *
+              Email 
             </label>
             <div className="space-y-1">
                 <input
@@ -232,7 +248,7 @@ function WaitList() {
           {/* First Name Input */}
           <div className="space-y-2">
             <label htmlFor="firstName" className={`block text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              First Name
+              First Name <span className={`font-medium ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>(optional)</span>
             </label>
             <div className="space-y-1">
                 <input
@@ -241,7 +257,6 @@ function WaitList() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  required
                   className={`w-full px-4 py-3 rounded-xl border focus:border-indigo-500 focus:ring-2 transition-all duration-200 outline-none ${isDarkMode ? 'border-gray-600 bg-gray-700/50 text-white focus:ring-indigo-900' : 'border-gray-200 bg-white/50 focus:ring-indigo-100'} ${formErrors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
                   placeholder="Your first name"
                 />
@@ -253,10 +268,42 @@ function WaitList() {
               </div>
           </div>
 
+          {/* Email Use Case Selection */}
+          <div className="space-y-3">
+            <label className={`block text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              What kind of emails would you use AutoFollowUp for? 
+              {/* <span className={`font-medium ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>(optional)</span> */}
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { name: 'Client communication', icon: '👥' },
+                { name: 'Sales outreach', icon: '💼' },
+                { name: 'Job interviews', icon: '🎯' },
+                { name: 'Networking', icon: '🤝' },
+                { name: 'Partnerships', icon: '⚡' },
+                { name: 'Other', icon: '📧' }
+              ].map((useCase) => (
+                <button
+                  key={useCase.name}
+                  type="button"
+                  onClick={() => handleUseCaseChange(useCase.name)}
+                  className={`p-3 rounded-xl border-2 transition-all duration-200 flex items-center space-x-2 ${
+                    formData.emailUseCase === useCase.name
+                      ? `border-indigo-500 ${isDarkMode ? 'bg-indigo-900 text-indigo-300' : 'bg-indigo-50 text-indigo-700'}`
+                      : `${isDarkMode ? 'border-gray-600 hover:border-gray-500 bg-gray-700/50 text-gray-300' : 'border-gray-200 hover:border-gray-300 bg-white/50 text-gray-700'}`
+                  }`}
+                >
+                  <span className="text-lg">{useCase.icon}</span>
+                  <span className="font-medium text-sm">{useCase.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Email Provider Selection */}
           <div className="space-y-3">
             <label className={`block text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              What email provider do you use? *
+              What email provider do you use?
             </label>
             <div className="grid grid-cols-2 gap-3">
               {[
@@ -282,6 +329,45 @@ function WaitList() {
             </div>
           </div>
 
+          {/* Pricing Preference Selection */}
+          <div className="space-y-3">
+            <label className={`block text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              How much would a tool like this be worth to you per month? 
+              {/* <span className={`font-medium ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>(optional)</span> */}
+            </label>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { name: '$5–10', icon: '💰', desc: 'Budget-friendly' },
+                { name: '$10–25', icon: '💎', desc: 'Fair value' },
+                { name: '$25+', icon: '🏆', desc: 'Premium tool' }
+              ].map((price) => (
+                <button
+                  key={price.name}
+                  type="button"
+                  onClick={() => handlePricingChange(price.name)}
+                  className={`p-4 rounded-xl border-2 transition-all duration-200 flex flex-col items-center space-y-1 ${
+                    formData.pricingPreference === price.name
+                      ? `border-indigo-500 ${isDarkMode ? 'bg-indigo-900 text-indigo-300' : 'bg-indigo-50 text-indigo-700'}`
+                      : `${isDarkMode ? 'border-gray-600 hover:border-gray-500 bg-gray-700/50 text-gray-300' : 'border-gray-200 hover:border-gray-300 bg-white/50 text-gray-700'}`
+                  }`}
+                >
+                  <span className="text-xl">{price.icon}</span>
+                  <span className="font-semibold text-sm">{price.name}</span>
+                  <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{price.desc}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Error Message */}
+          {submitStatus.error && (
+            <div className={`p-4 rounded-xl ${isDarkMode ? 'bg-red-900/20 border border-red-800' : 'bg-red-50 border border-red-200'}`}>
+              <p className={`text-sm ${isDarkMode ? 'text-red-400' : 'text-red-600'} text-center`}>
+                {submitStatus.error}
+              </p>
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="button"
@@ -289,11 +375,6 @@ function WaitList() {
             disabled={submitStatus.loading}
             className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
           >
-            {submitStatus.error && (
-              <p className={`text-sm ${isDarkMode ? 'text-red-400' : 'text-red-600'} text-center mb-4`}>
-                {submitStatus.error}
-              </p>
-            )}
             {submitStatus.loading ? (
               <>
                 <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">

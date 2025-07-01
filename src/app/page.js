@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import { Mail, Zap, Clock } from 'lucide-react';
 import GmailComponent from '@/components/gmail/GmailComponent';
 import Link from 'next/link';
+import WaitlistIncentivePlan from '@/components/WaitlistPlan/WaitlistIncentivePlan ';
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -198,7 +199,6 @@ export default function Home() {
 
           {/* Demo Section */}
           <motion.div 
-            
             className='mt-40'
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -226,6 +226,82 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <GmailComponent />
+          </motion.div>
+
+          <motion.div 
+            className='mt-12'
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <WaitlistIncentivePlan/>
+            
+          </motion.div>
+          
+
+
+          <motion.div 
+            className='mt-40 mb-20'
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              variants={fadeInUp}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              className="flex justify-center"
+            >
+              <div className={`max-w-2xl mx-auto p-12 rounded-3xl shadow-xl text-center ${
+                isDarkMode 
+                  ? 'bg-gray-800/60 backdrop-blur-sm border border-gray-700/30' 
+                  : 'bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-2xl'
+              }`}>
+                {/* Email Icon */}
+                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg">
+                  <svg 
+                    className="w-8 h-8 text-white" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
+                    />
+                  </svg>
+                </div>
+
+                {/* Heading */}
+                <h2 className={`text-3xl font-bold mb-6 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Join the waitlist & get early access
+                </h2>
+
+                {/* Description */}
+                <p className={`text-lg leading-relaxed mb-8 max-w-lg mx-auto ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  Be among the first to experience effortless email follow-ups. No spam, just product 
+                  updates and early access.
+                </p>
+
+                <Link href='/waitlist'>
+                  <Button children='Join The Waitlist - Get Rewards' />
+                </Link>
+
+                <p className={`mt-4 text-sm leading-relaxed mb-8 max-w-lg mx-auto ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-500'
+                }`}>The earlier you join, the bigger the reward!</p>
+                
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
