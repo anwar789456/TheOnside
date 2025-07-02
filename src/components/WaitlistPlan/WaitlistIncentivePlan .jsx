@@ -62,7 +62,7 @@ const WaitlistIncentivePlan = () => {
       bgColor: isDarkMode ? 'bg-orange-900/20' : 'bg-orange-50',
       borderColor: isDarkMode ? 'border-orange-600/30' : 'border-orange-200',
       tagColor: 'bg-orange-500',
-      mainTitle: 'Users #31-500',
+      mainTitle: 'Waitlist signups #31-500',
       subtitle: 'Waitlist signups #31-500',
       reward: '🎉 50% OFF first 3 months',
       rewardBg: isDarkMode ? 'bg-orange-800/30' : 'bg-orange-100',
