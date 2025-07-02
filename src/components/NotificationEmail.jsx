@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const NotificationEmail = ({ firstName, email, provider }) => (
+export const NotificationEmail = ({ email, firstName, provider, emailUseCase, pricingPreference }) => (
   <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
     <div style={{ 
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -39,6 +39,12 @@ export const NotificationEmail = ({ firstName, email, provider }) => (
         </p>
         <p style={{ margin: '5px 0', color: '#666' }}>
           <strong>Email Provider:</strong> {provider}
+        </p>
+        <p style={{ margin: '5px 0', color: '#666' }}>
+          <strong>Email Use Case:</strong> {emailUseCase}
+        </p>
+        <p style={{ margin: '5px 0', color: '#666' }}>
+          <strong>Preferred Price:</strong> {pricingPreference}
         </p>
         <p style={{ margin: '5px 0', color: '#666' }}>
           <strong>Signed up:</strong> {new Date().toLocaleString()}
